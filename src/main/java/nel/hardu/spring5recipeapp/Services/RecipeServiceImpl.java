@@ -5,6 +5,7 @@ import nel.hardu.spring5recipeapp.commands.RecipeCommand;
 import nel.hardu.spring5recipeapp.converters.RecipeCommandToRecipe;
 import nel.hardu.spring5recipeapp.converters.RecipeToRecipeCommand;
 import nel.hardu.spring5recipeapp.domain.Recipe;
+import nel.hardu.spring5recipeapp.exceptions.NotFoundException;
 import nel.hardu.spring5recipeapp.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +43,8 @@ public class RecipeServiceImpl implements RecipeService{
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
         if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Recipe Not Found!");
+//            throw new RuntimeException("Recipe Not Found!");
+            throw new NotFoundException("Recipe Not Found");
         }
 
         return recipeOptional.get();
